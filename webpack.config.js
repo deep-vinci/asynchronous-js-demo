@@ -17,6 +17,10 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource",
       },
+      {
+        test: /\.txt/,
+        type: 'asset/source',
+       },
     ],
   },
   plugins: [
@@ -26,5 +30,6 @@ module.exports = {
       scriptLoading: "defer",
     }),
   ],
-  mode: "development",
+  mode: "development"
+    
 };

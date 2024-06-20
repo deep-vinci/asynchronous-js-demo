@@ -1,0 +1,3 @@
+In javascript there are mainly two different types of tasks which are blocking and non blocking, any task that takes a significant time to complete (relatively) is called blocking task in javascript (a huge while loop for an example) as that task is inserted into the call stack, javascript runtime first executes the loop then it clears of the loop
+
+d

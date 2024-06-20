@@ -1,13 +1,18 @@
 import "./style.css";
-
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 
+import txt from './async.txt'; 
 
 hljs.registerLanguage('javascript', javascript);
 
 
 const codeBlocks = document.querySelectorAll("pre");
+
+const asyncTextBlock = document.querySelector(".async-text").innerHTML = `${txt}`
+const callbackTextBlock = document.querySelector(".callback-text")
+const promisesTextBlock = document.querySelector(".promises-text")
+const awaitTextBlock = document.querySelector(".await-text")
 
 const callback = `console.log(1)
 
@@ -20,6 +25,7 @@ const finishedReading = (error, data) => {
 
 console.log(2)
 `;
+
 
 const promises = `console.log(1)
 
@@ -73,4 +79,3 @@ codeBlocks.forEach((codeBlock, index) => {
 });
 
 hljs.highlightAll();
-
