@@ -15,16 +15,15 @@ const promisesTextBlock = document.querySelector(".promises-text")
 const awaitTextBlock = document.querySelector(".await-text")
 
 const callbackRun = document.querySelector(".callback-run")
-const promiseskRun = document.querySelector(".promises-run")
+const promisesRun = document.querySelector(".promises-run")
 const awaitRun = document.querySelector(".await-run")
 
 const callbackOutput = document.querySelector(".callback-output")
 const promisesOutput = document.querySelector(".promises-output")
 const awaitOutput = document.querySelector(".await-output")
 
-const callback = `console.log(1)
-
-function fetchData(url, callback) {
+const callback = `function fetchData(url, callback) {
+    // behind the scene XMLHttpRequest is being used to output on the "Run" button click 
     let data = fetchingdata(url)
     callback(data);
   }
@@ -33,47 +32,35 @@ function handleResponse(data) {
     console.log(data);
 }
   
-fetchData("//api.com", handleResponse);
+fetchData("https://catfact.ninja/fact", handleResponse);
   
-console.log(2)
+console.log("Code Execution Complete!")
 `;
 
 
-const promises = `console.log(1)
-
-let readConfigFile = new Promise(function(resolve, reject) {
-
-    // read the file
-
-    if(file) {
-        resolve('Success!');
-    }
-    else {
-        reject('Failure!');
-    }
-});
-
-p.then(result => { 
-    console.log(result)
-}).catch(err => {
-    console.erorr(err)
-}).finally(function() {
-   console.log("Process Done!")
-});
-
-console.log(2)
-`
-
-const asyncAwait = `console.log(1)
-
-import { promises as fs } from "fs";
-
-const readConfigFile = async () => {
-    const result = await readFile('config.txt','binary')
-    console.log(result)
+const promises = `function makeXHRRequest() {
+    return fetch("https://catfact.ninja/fact")
+        .then(response => {
+            return response.json()
+        }).then(data => {
+            console.log(data)
+        })
 }
 
-console.log(2)
+console.log("Code Execution Complete!")
+`
+
+const asyncAwait = `async function makeXHRRequest() {
+    let response = await fetch("https://catfact.ninja/fact");
+    let data = await response.json()
+
+    console.log(data)
+}
+
+makeXHRRequest()
+
+
+console.log("Code Execution Complete!")
 `
 
 const codeSnippets = {
@@ -93,5 +80,56 @@ codeBlocks.forEach((codeBlock, index) => {
 hljs.highlightAll();
 
 callbackRun.addEventListener("click", () => {
-    console.log("click")
+    function makeXHRRequest(url, callback) {
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true); // bool ensures its async
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    callback(null, xhr.responseText);
+                } else {
+                    callback(new Error(`Request error ${xhr.status}`))
+               }   
+            }
+        }
+        xhr.send();    
+    }
+
+    makeXHRRequest("https://catfact.ninja/fact", (error, data) => {
+        if (error) {
+            console.log(error)
+        } else {
+            callbackOutput.textContent += `\n${data}`;
+            console.log(data)
+        }
+    })
+    callbackOutput.textContent = "Code Execution Complete!";
+
+})
+
+promisesRun.addEventListener("click", () => {
+    function makeXHRRequest() {
+        return fetch("https://catfact.ninja/fact")
+            .then(response => {
+                return response.json()
+            }).then(data => {
+                promisesOutput.textContent += `\n${JSON.stringify(data)}`;
+            })
+    }
+
+    makeXHRRequest();
+    promisesOutput.textContent = "Code Execution Complete!";
+})
+
+awaitRun.addEventListener("click", () => {
+    async function makeXHRRequest() {
+        let response = await fetch("https://catfact.ninja/fact");
+        let data = await response.json()
+
+        awaitOutput.textContent += `\n${JSON.stringify(data)}`;
+    }
+
+    makeXHRRequest()
+    awaitOutput.textContent = "Code Execution Complete!";
+
 })

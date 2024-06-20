@@ -19,9 +19,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
+    padding-top: 100px;
     font-family: KievitOT-Black;
     font-size: 3rem;
-    line-height: 8rem;
 }
 
 h2 {
@@ -46,7 +46,7 @@ p {
 }
 
 .container {
-    width: 40vw;
+    width: min(750px, 90vw);
     max-width: 100%;
 }
 
@@ -96,4 +96,12 @@ code {
 
 .text-section {
     flex-direction: column;
+}
+
+.output {
+    font-family: monospace;
+    white-space: pre-line;
+    height: 5rem;
+    overflow: auto;
+    padding: 10px;
 }
