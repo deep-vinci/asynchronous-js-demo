@@ -1,3 +1,32 @@
-In javascript there are mainly two different types of tasks which are blocking and non blocking, any task that takes a significant time to complete (relatively) is called blocking task in javascript (a huge while loop for an example) as that task is inserted into the call stack, javascript runtime first executes the loop then it clears of the loop
+In javascript there are mainly two different types of tasks which are blocking and non blocking, any task that takes a significant time to complete (relatively) is called blocking task in javascript (a huge while loop for an example) as that task is inserted into the call stack, javascript engine (which comprises of call stack and heap) first executes the loop then it clears of the loop off of the stack moving on to the next piece of code
 
-d
+Javascript is a single threaded language which means it is physically impossible for it to perform more than one task at a given moment, but still it is very common occurence that users run bits of code Asynchronously. 
+
+<em>how is that possible?</em>
+
+Well, the Javascript engine (v8, spidermonkey etc) is just a part of the puzzle. In addition to the engine there is a thing known as Web apis, this is provided by your browser itself in adition to the Javascript Engine and the web api is responsible for executing blocking bits of code asynchronously, which means it ensures that the bits of code don't block the main thread itself which would let to browser renderer getting stuck as renderer needs the call stack to be free to execute each render (renderer is set to higher priority compared to task queue)
+
+Web apis provide tons of APIs such as canvas API, Clipboard API, DOM API, Fetch API, HTML sanitizer api to name a few and in that there are few APIs that are run asynchronously.
+
+
+<h2>How it all works</h2>
+- It starts from the parser reading the code, making the syntax tree and checking for the syntax errors.
+- Both the blocking and non-blocking functions are pushed on call stack one by one.
+- For the non-blocking bit of a function like console.log it is pushed, executed and than popped off the call stack.
+- For <b>Blocking </b> bit of function such as a fetch() function, it is pushed and then popped off the call stack as the blocking part is handled by <b>Web apis</b>.
+- Normal flow of the code execution is maintained after that through the call stack as the call stack is free of the blocking function.
+- Once the callback function is returned from the blocking function that was running in Web api it is not pushed to the call stack directly but to a queue know as callback queue or task queue.
+- And here comes the <b>Event Looop</b>, Event loop handles the queues and once the call stack is empty it pushes the queued items one by one off the callback queue to the call stack.
+
+
+<h2>Going in little more detail</h2>
+If you notice, I did not mention what happens when the Asynchronous code is not a callback function but rather a <b>Promise</b>
+
+There is one more queue other than callback/task queue which is known <b>Microtask Queue</b>, Microtask queue is used for the immidiate execution of .then.catch.finally after the promise is resolved or rejected. This queue has higher priority over the Callback queue, so when the call stack is emptied, first job of event loop is to check if the Microtask queue is empty if it is than only the Callback queue is pushed to the call stack.
+
+Microtask Queue is used by 
+- promise .then .catch and .finally 
+- async / await (just a syntactic sugar over the promises)
+- mutationObserver API
+- queuMicrotask callback
+

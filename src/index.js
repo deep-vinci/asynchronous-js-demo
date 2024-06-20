@@ -14,15 +14,27 @@ const callbackTextBlock = document.querySelector(".callback-text")
 const promisesTextBlock = document.querySelector(".promises-text")
 const awaitTextBlock = document.querySelector(".await-text")
 
+const callbackRun = document.querySelector(".callback-run")
+const promiseskRun = document.querySelector(".promises-run")
+const awaitRun = document.querySelector(".await-run")
+
+const callbackOutput = document.querySelector(".callback-output")
+const promisesOutput = document.querySelector(".promises-output")
+const awaitOutput = document.querySelector(".await-output")
+
 const callback = `console.log(1)
 
-fs.readFile('config.txt', finishedReading)
-
-const finishedReading = (error, data) => {
-    // handle error here
-    console.log(data)
+function fetchData(url, callback) {
+    let data = fetchingdata(url)
+    callback(data);
+  }
+  
+function handleResponse(data) {
+    console.log(data);
 }
-
+  
+fetchData("//api.com", handleResponse);
+  
 console.log(2)
 `;
 
@@ -79,3 +91,7 @@ codeBlocks.forEach((codeBlock, index) => {
 });
 
 hljs.highlightAll();
+
+callbackRun.addEventListener("click", () => {
+    console.log("click")
+})

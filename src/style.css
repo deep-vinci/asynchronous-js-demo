@@ -31,9 +31,10 @@ h2 {
 
 p {
     font-family: charter Regular;
-    font-size: 1.2rem;
-    line-height: 1.8rem;
+    font-size: 18px;
+    line-height: 28px;
     white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 .page {
@@ -45,7 +46,7 @@ p {
 }
 
 .container {
-    width: 70vw;
+    width: 40vw;
     max-width: 100%;
 }
 
@@ -91,4 +92,8 @@ code {
     margin-top: 8px;
     border-radius: 10px;
     height: 50%;
+}
+
+.text-section {
+    flex-direction: column;
 }
