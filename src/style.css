@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    max-width: 100% 
+}
+
+@font-face {
+    font-family: KievitOT-Black;
+    src: url("KievitOT-Black.woff");
+}
+
+@font-face {
+    font-family: Charter Regular;
+    src:url("Charter Regular.ttf");
+}
+
+h1 {
+    font-family: KievitOT-Black;
+    font-size: 3rem;
+    line-height: 8rem;
+}
+
+p {
+    font-family: charter Regular;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+}
+
+.page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.container {
+    width: 70vw;
+    max-width: 100%;
+}
+
+.text-section {
+    height: 50vh;
+}
+
+.container > div > div {
+    display: flex;
+    flex: 1;
+}
+.container > div > div > div {
+    flex-basis: 50%;
+    flex-grow: 3;
+}
+.container > div > div > div + div {
+    /* margin: 20px; */
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid red; */
+}
+.container > div > div > div + div > button {
+    align-self: flex-end;
+    margin-top: 8px;
+    background-color: rgb(119, 192, 9);
+    color: white;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 10px;
+}
+
+
+.container > div > div + div {
+
+}
+
+code {
+    border-radius: 10px;
+}
+
+.output {
+    border: 1px solid rgb(223, 223, 223);
+    margin-top: 8px;
+    border-radius: 10px;
+    height: 50%;
+}
