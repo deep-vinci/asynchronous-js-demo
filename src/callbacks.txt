@@ -1,0 +1,5 @@
+Callbacks are just functions that take functions as an argument and then once the task is completed, through callback function the data can be returned or basically event can be fired to let the user know a task is done.
+
+For example in this piece of pseudo code below, the fetchData function has two args url and callback and callback takes handleResponse() function, so once the data has arrived from fetch the callback is fired and through callback the data is sent as an arguemnt and that is printed to the console 
+
+Not to be confused in between events and callbacks as the callback function does not have someone listening for the fire event, it is used for more general purpose

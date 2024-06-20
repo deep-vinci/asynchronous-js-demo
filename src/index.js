@@ -2,16 +2,18 @@ import "./style.css";
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 
-import txt from './async.txt'; 
+import async from './async.txt'; 
+import callbacktxt from './callbacks.txt'; 
+import promisestxt from './promises.txt'; 
 
 hljs.registerLanguage('javascript', javascript);
 
 
 const codeBlocks = document.querySelectorAll("pre");
 
-const asyncTextBlock = document.querySelector(".async-text").innerHTML = `${txt}`
-const callbackTextBlock = document.querySelector(".callback-text")
-const promisesTextBlock = document.querySelector(".promises-text")
+const asyncTextBlock = document.querySelector(".async-text").innerHTML = async
+const callbackTextBlock = document.querySelector(".callback-text").innerHTML = callbacktxt
+const promisesTextBlock = document.querySelector(".promises-text").innerHTML = promisestxt
 const awaitTextBlock = document.querySelector(".await-text")
 
 const callbackRun = document.querySelector(".callback-run")

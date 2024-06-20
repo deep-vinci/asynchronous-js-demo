@@ -1,0 +1,9 @@
+Promises and callbacks above the hood look similar, but beneath the hood it's two completely different way to perform an asynchronous function. 
+
+In Callbacks, a callback function is returned once the task is done but in Promises the Promise object is returned immideately which represents the result of the task and once the promise is resolved, the data can be recived using .then
+
+The Promise constructor provides two callbacks resolve and reject so when the result is obtained, the consuming functions can subscribe to the event. using .then or .catch
+
+The Object returned by Promise Object
+- state -- pending | fullfilled | rejected
+- resutl -- undefined | value | error
