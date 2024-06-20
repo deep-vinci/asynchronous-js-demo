@@ -54,6 +54,7 @@ const readConfigFile = async () => {
     const result = await readFile('config.txt','binary')
     console.log(result)
 }
+
 console.log(2)
 `
 
